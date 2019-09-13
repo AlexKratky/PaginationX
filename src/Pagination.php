@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace AlexKratky;
 
 use AlexKratky\Route;
-
+use AlexKratky\db;
 
 class Pagination {
     /**

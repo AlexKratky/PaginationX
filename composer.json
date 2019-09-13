@@ -11,7 +11,8 @@
     ],
     "require": {
         "php": ">=7.0",
-        "alexkratky/routex": "^0.2.0"
+        "alexkratky/routex": "^0.2.0",
+        "alexkratky/db": "^0.1.0"
     },
     "autoload": {
         "files": ["src/Pagination.php"]
