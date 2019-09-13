@@ -1,0 +1,19 @@
+{
+    "name": "alexkratky/paginationx",
+    "description": "Class to split data into several pages.",
+    "keywords": ["php", "pagination", "data", "split", "file", "sql"],
+    "homepage": "https://panx.eu/",
+    "license": ["MIT"],
+    "authors": [{
+            "name": "Alex Kratky",
+            "homepage": "https://alexkratky.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "alexkratky/routex": "^0.2.0"
+    },
+    "autoload": {
+        "files": ["src/Pagination.php"]
+    }
+}
