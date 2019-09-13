@@ -1,6 +1,6 @@
 # Pagination
 
-Pagination is class that splits the data to segments and browse between these segments.
+Pagination is class that splits the data to segments and browse between these segments. Before usage SQL pagination, need to setup DB connection (AlexKratky\db::connect()).
 
 ### Installation
 
