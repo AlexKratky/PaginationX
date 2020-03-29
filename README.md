@@ -9,6 +9,7 @@ Pagination is class that splits the data to segments and browse between these se
 ### The basic usage:
 
 ```php
+require 'vendor/autoload.php';
 //example data
 $data = array(0,1,2,3,4,5,6,7,8,9);
 //enter data and how many elements are on page (3). By default 10.

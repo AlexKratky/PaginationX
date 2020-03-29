@@ -5,7 +5,7 @@
  * @link https://panx.eu/docs/                          Documentation
  * @link https://github.com/AlexKratky/panx-framework/  Github Repository
  * @author Alex Kratky <info@alexkratky.cz>
- * @copyright Copyright (c) 2019 Alex Kratky
+ * @copyright Copyright (c) 2020 Alex Kratky
  * @license http://opensource.org/licenses/mit-license.php MIT License
  * @description Class to split data into several pages. Part of panx-framework.
  */
@@ -56,10 +56,10 @@ class Pagination {
         $this->data = $data;
         switch ($DATA_TYPE) {
             case self::DATA_ARRAY:
-                $this->totalPages  = count($data)/$perPage;
+                $this->totalPages = count($data)/$perPage;
                 break;
             case self::DATA_SQL:
-                $this->totalPages  = db::count("SELECT COUNT(*) ".$this->data, array())/$perPage;
+                $this->totalPages = db::count("SELECT COUNT(*) ".$this->data, array())/$perPage;
                 break;
             case self::DATA_FILE:
                 $this->totalPages = 0;
@@ -99,13 +99,13 @@ class Pagination {
                 break;
             case self::DATA_SQL:
                 //dump("SELECT * ".$this->data." WHERE ID>$start LIMIT {$this->perPage}", false);
-                $x = db::multipleSelect("SELECT * ".$this->data." WHERE ID>$start LIMIT {$this->perPage}");
+                $x = db::multipleSelect("SELECT * ".$this->data." WHERE ID>{$start} LIMIT {$this->perPage}");
                 foreach ($x as $v) {
                     array_push($res, $v);
                 }
                 break;
             case self::DATA_FILE:
-                $spl = new SplFileObject($this->data);
+                $spl = new \SplFileObject($this->data);
                 for ($i = $start; $i < $max; $i++) {
                     $spl->seek($i);
                     if($spl->current() !== false)
