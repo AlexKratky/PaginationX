@@ -1,10 +1,10 @@
 <?php
 /**
  * @name Pagination.php
- * @link https://alexkratky.cz                          Author website
+ * @link https://alexkratky.com                         Author website
  * @link https://panx.eu/docs/                          Documentation
- * @link https://github.com/AlexKratky/panx-framework/  Github Repository
- * @author Alex Kratky <info@alexkratky.cz>
+ * @link https://github.com/AlexKratky/PaginationX/  Github Repository
+ * @author Alex Kratky <alex@panx.dev>
  * @copyright Copyright (c) 2020 Alex Kratky
  * @license http://opensource.org/licenses/mit-license.php MIT License
  * @description Class to split data into several pages. Part of panx-framework.
@@ -79,7 +79,7 @@ class Pagination {
 
         $this->type = $DATA_TYPE;
         $this->perPage = $perPage;
-        $this->currentPage = (Route::getValue("PAGE") !== false ? (int)Route::getValue("PAGE") : ($GLOBALS["request"]->getQuery("page") ?? 1));    
+        $this->currentPage = (Route::getValue("PAGE") !== false ? (int)Route::getValue("PAGE") : (isset($GLOBALS["request"]) ? ($GLOBALS["request"]->getQuery("page") ?? 1) : 1));    
     }
 
     /**
@@ -149,6 +149,19 @@ class Pagination {
     }
 
     /**
+     * Sets the current page.
+     * @param int $page The page number.
+     * @return bool Returns true if the page was set or false instead.
+     */
+    public function setPage($page) {
+        if($page > 0 && $page <= $this->totalPages()) {
+            $this->currentPage = $page;
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Set up infinity scroll. Use this function inside the container where should be data loaded.
      * @param string|null $URI The loader URI. By default $GLOBALS["request"]->getUrl()->getString() . "/load/"
      * @param string|null $callback The JS callback that will be called on new page load. If sets to null, it will just append the data inside the container.
@@ -156,7 +169,7 @@ class Pagination {
      */
     public static function infinityScroll(?string $URI = null, ?string $callback = null, int $PAGE = 1) {
         if($URI === null) {
-            $URI = $GLOBALS["request"]->getUrl()->getString() . "/load/";
+            $URI = $_SERVER["REQUEST_URI"] . "/load/";
         }
         echo '<script src="/res/js/InfinityScroll.js"></script>';
         echo '<script>initInfinityScroll("'.$URI.'", '.($callback ?? "null").', null, '.$PAGE.');</script>';
